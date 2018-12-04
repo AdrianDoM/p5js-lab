@@ -3,11 +3,15 @@ function Graph() {
     this.edges = [];
 }
 
-Graph.prototype.addVertex = function(val) {
+Graph.prototype.hasVertex = function(val) {
+    return this.vertices.some(v => v.value == val);
+}
+
+Graph.prototype.addVertex = function(val, x, y) {
     if (this.vertices.some(v => v.value == val))
         console.log(`A vertex with value ${val} already exists.`);
     else {
-        var newVertex = new Vertex(val);
+        var newVertex = new Vertex(val, x, y);
         this.vertices.push(newVertex);
         return newVertex;
     }
@@ -19,6 +23,16 @@ Graph.prototype.getVertex = function(val) {
     return vertex;
 }
 
+Graph.prototype.remVertex = function(val) {
+    var i = this.vertices.findIndex(v => v.value == val);
+    if (i < 0) return;
+    this.vertices.splice(i, 1);
+    var vals = this.vertices.map(v => v.value);
+    for (let v of vals) {
+        this.remEdge(val, v);
+    }
+}
+
 Graph.prototype.hasEdge = function(v1, v2) {
     return this.edges.some(
         e => (e[0] == v1 && e[1] == v2) || (e[1] == v1 && e[0] == v2)
@@ -26,6 +40,7 @@ Graph.prototype.hasEdge = function(v1, v2) {
 }
 
 Graph.prototype.addEdge = function(val1, val2) {
+    if (val1 == val2) return;
     var v1 = this.getVertex(val1);
     var v2 = this.getVertex(val2);
     var alreadyAdded = this.hasEdge(v1, v2);
@@ -36,6 +51,20 @@ Graph.prototype.addEdge = function(val1, val2) {
     }
 
     this.edges.push([v1, v2]);
+}
+
+Graph.prototype.getEdge = function(val1, val2) {
+    return this.edges.find(
+        e => (e[0].value == val1 && e[1].value == val2) || (e[1].value == val1 && e[0].value == val2)
+    )
+}
+
+Graph.prototype.remEdge = function(val1, val2) {
+    var i = this.edges.findIndex(
+        e => (e[0].value == val1 && e[1].value == val2) || (e[1].value == val1 && e[0].value == val2)
+    )
+    if (i < 0) return;
+    this.edges.splice(i, 1);
 }
 
 Graph.prototype.display = function() {

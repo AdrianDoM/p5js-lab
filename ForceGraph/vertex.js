@@ -1,5 +1,5 @@
-function Vertex(val) {
-    this.pos = createVector(random(width/2-posR, height/2+posR),random(width/2-posR, height/2+posR));
+function Vertex(val, x, y) {
+    this.pos = createVector(x,y);
     this.vel = createVector(0,0);
     this.acc = createVector(0,0);
     this.value = val;
@@ -11,6 +11,7 @@ Vertex.prototype.display = function() {
     ellipseMode(RADIUS);
     ellipse(this.pos.x, this.pos.y, vertexRadius, vertexRadius);
     fill(255);
+    textSize(20);
     textAlign(CENTER, CENTER);
     text(this.value.toString(), this.pos.x, this.pos.y);
 }

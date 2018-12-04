@@ -1,8 +1,33 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
 }
 
 canvas {
     display: block;
+}
+
+.gui {
+    border-radius: 1em;
+    position: fixed;
+    margin: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+h1 {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-weight: 600ps;
+    text-align: center;
+    margin: .5em;
+}
+
+h3 {
+    margin: .7em auto 5px 5px;
+    font-weight: normal;
+}
+
+input {
+    width: 3em;
 }

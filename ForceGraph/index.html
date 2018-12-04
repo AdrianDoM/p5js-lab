@@ -13,5 +13,21 @@
     <script src="graph.js"></script>
   </head>
   <body>
+    <div class="gui">
+      <h1>ForceGraph</h1>
+      <h3>Add vertex</h3>
+      <input id="addVertex_input" name="addvertex" type="number">
+      <button type="button" onclick="inputAddVertex()">Add</button>
+      <h3>Remove vertex</h3>
+      <select id="remVertex_input" name="removevertex"></select>
+      <button type="button" onclick="inputRemVertex()">Remove</button>
+      <h3>Add edge</h3>
+      <input id="addEdge_input1" name="edge1" type="number">
+      <input id="addEdge_input2" name="edge2" type="number">
+      <button type="button" onclick="inputAddEdge()">Add</button>
+      <h3>Remove edge</h3>
+      <select id="remEdge_input" name="removeedge"></select>
+      <button type="button" onclick="inputRemEdge()">Remove</button>
+    </div>
   </body>
 </html>
