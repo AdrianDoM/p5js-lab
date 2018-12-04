@@ -16,7 +16,7 @@ var maxVel = 10;
 var maxAcc = 1;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(windowWidth, windowHeight);
 
   graph = new Graph();
   for (var i = 0; i < V; i++) graph.addVertex(i);
@@ -35,10 +35,14 @@ function draw() {
   graph.update();
   graph.display();
 }
-30
+
 function mouseDragged() {
   var mousePos = createVector(mouseX, mouseY);
   for (let v of graph.vertices)
     if (v.isOver(mousePos))
       v.forceMove(mousePos);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
