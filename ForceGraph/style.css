@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Trebuchet MS", Arial, sans-serif;
+    position: fixed;
 }
 
 canvas {
