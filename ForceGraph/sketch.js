@@ -40,12 +40,33 @@ function draw() {
   graph.display();
 }
 
-function mouseDragged() {
+/*
+  MOUSE DRAGGING HANDLING
+*/
+
+var dragged = null;
+
+function mousePressed() {
   var mousePos = createVector(mouseX, mouseY);
   for (let v of graph.vertices)
-    if (v.isOver(mousePos))
-      v.forceMove(mousePos);
+    if (v.isOver(mousePos)) {
+      dragged = v;
+      break;
+    }
 }
+
+function mouseDragged() {
+  var mousePos = createVector(mouseX, mouseY);
+  dragged.forceMove(mousePos);
+}
+
+function mouseReleased() {
+  dragged = null;
+}
+
+/*
+  GRAPH MODIFYING FUNCTIONS
+*/
 
 function addOption(sel, val) {
   var opt = createElement('option', val.toString());
@@ -59,12 +80,13 @@ function remOption(val) {
   opt.remove();
 }
 
+/*
+  HTML DOM FUNCTIONS
+*/
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
-
-
-// Input functions
 
 function inputAddVertex() {
   var val = addVertex_input.value();

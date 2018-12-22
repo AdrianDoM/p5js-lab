@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-family: "Trebuchet MS", Arial, sans-serif;
     position: fixed;
+    overscroll-behavior-y: contain;
 }
 
 canvas {
@@ -29,6 +30,6 @@ h3 {
     font-weight: normal;
 }
 
-input {
+input[type="number"] {
     width: 3em;
 }

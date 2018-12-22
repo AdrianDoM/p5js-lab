@@ -85,6 +85,7 @@ Graph.prototype.update = function() {
             if (this.hasEdge(v1, v2)) v1.interactNeighbor(v2);
             else v1.repell(v2);
         }
+        v1.edges();
     }
     for (let v of this.vertices) {
         v.update();
