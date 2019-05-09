@@ -1,8 +1,5 @@
 let walls = []
-let source
-
-let xoff = 0
-let yoff = 10
+let sources = []
 
 function setup() {
   createCanvas(600, 600)
@@ -21,7 +18,9 @@ function setup() {
   walls.push(new Wall(400, 500, 500, 500))
   walls.push(new Wall(500, 500, 350, 100))
 
-  source = new Source(createVector(300, 300))
+  sources.push(new Source(createVector(300, 300), color('cyan')))
+  sources.push(new Source(createVector(300, 300), color('magenta')))
+  sources.push(new Source(createVector(300, 300), color('yellow')))
 }
 
 function draw() {
@@ -29,10 +28,9 @@ function draw() {
 
   //for (let w of walls) w.display()
 
-  source.pos.set(noise(xoff) * width, noise(yoff) * height)
-  source.cast(walls)
-  source.display()
-
-  xoff += 0.01
-  yoff += 0.01
+  for (let source of sources) {
+    source.move()
+    source.cast(walls)
+    source.display()
+  }
 }

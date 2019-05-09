@@ -6,8 +6,8 @@ class Ray {
     this.end = p5.Vector.add(pos, dir)
   }
 
-  display() {
-    stroke(255, 255, 255, 50)
+  display(c) {
+    stroke(c)
     strokeWeight(1)
     line(this.pos.x, this.pos.y, this.end.x, this.end.y)
   }
