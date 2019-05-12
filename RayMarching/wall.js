@@ -13,11 +13,20 @@ class Line {
   }
 
   dist(p) {
-    const num = (this.b.y - this.a.y) * p.x - (this.b.x - this.a.x) * p.y
-      + this.b.x * this.a.y - this.b.y * this.a.x
-    const ortDist = abs(num) / this.l
-    const verDist = min(p.dist(this.a), p.dist(this.b))
-    return abs(num) / this.l
+    const dir = p5.Vector.sub(this.b, this.a)
+    const l2  = dir.magSq()
+    
+    if (l2 == 0) return p.dist(this.a) // a == b case
+    
+    const proj = dir.dot( p5.Vector.sub(p, this.a) ) / l2
+    
+    let t
+    if (proj < 0) t = 0
+    else if (proj > 1) t = 1
+    else t = proj
+
+    const closestPoint = p5.Vector.add(this.a, dir.mult(t))
+    return p.dist(closestPoint)
   }
 
 }

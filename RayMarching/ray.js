@@ -8,13 +8,12 @@ class Ray {
   display() {
     stroke('cyan')
     strokeWeight(1)
+    noFill()
     line(this.pos.x, this.pos.y, this.end.x, this.end.y)
     ellipse(this.pos.x, this.pos.y, this.dir.mag(), this.dir.mag())
   }
 
-  march(walls, iter) {
-    //if (iter <= 0) return
-
+  march(walls) {
     this.dir = p5.Vector.sub(this.end, this.pos).normalize()
 
     let minDist = Infinity
@@ -33,7 +32,7 @@ class Ray {
     this.pos = this.end.copy()
     this.end.add(this.dir)
 
-    this.march(walls, --iter)
+    this.march(walls)
   }
 
 }
