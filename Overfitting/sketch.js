@@ -79,6 +79,7 @@ function windowResized() {
     resizeCanvas(600, 400)
   else
     resizeCanvas(windowWidth - 20, (windowWidth - 20) * 4 / 6)
+  plot_range = L.range(0, width + 3, 3)
 }
 
 function drawPoints() {
