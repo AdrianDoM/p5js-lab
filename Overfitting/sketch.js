@@ -79,7 +79,6 @@ function windowResized() {
     resizeCanvas(600, 400)
   else
     resizeCanvas(windowWidth - 20, (windowWidth - 20) * 4 / 6)
-  resetPoints()
 }
 
 function drawPoints() {
