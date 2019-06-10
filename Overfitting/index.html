@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="AdrianDoM">
+  <title>The dangers of overfitting</title>
+  <script src="../p5.min.js"></script>
+  <script src="http://mlweb.loria.fr/lalolib-module.min.js"></script>
+  <script src="sketch.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Space+Mono|Work+Sans&display=swap');
+
+    body {
+      font-family: 'Work Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      margin: 20px calc(50vw - 300px);
+      text-align: justify;
+      font-size: 18px;
+    }
+
+    h1 {
+      font-size: 33px;
+      text-align: center;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .ms {
+      font-family: 'Space Mono', monospace;
+      font-variant-ligatures: none;
+    }
+
+    .ms a {
+      background-size: 1px 1em;
+      box-shadow:
+        inset 0 1.22em white,
+        inset 0 1.32em #000;
+      display: inline;
+      text-shadow:
+        -0.12em -0.03em white,
+        -0.12em 0.03em white,
+        0.12em -0.03em white,
+        0.12em 0.03em white;
+    }
+
+    #canvasHolder {
+      margin-top: 1em;
+      margin-bottom: 2em;
+      align-self: center;
+      position: relative;
+      width: 600px;
+      height: 400px;
+      box-shadow: 0 15px 50px -30px;
+      border: dashed tomato 5px;
+      background: lightcyan;
+      background-clip: border-box;
+      /* Texture taken from https://www.transparenttextures.com/ */
+      background-image: url("paper-fibers.png");
+    }
+
+    #canvasTexture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Texture taken from https://www.transparenttextures.com/ */
+      background-image: url("paper-fibers.png");
+    }
+
+    #reset {
+      text-align: right;
+    }
+
+    .link {
+      display: inline;
+      border-bottom: 1px dashed black;
+      cursor: pointer;
+    }
+
+    p.credit {
+      margin-bottom: 0;
+      color: #555;
+    }
+
+    ul.credit {
+      color: #555;
+      margin-top: 0;
+    }
+
+    ul.credit li {
+      margin: 0.3em 0;
+    }
+
+    .credit .link {
+      border-bottom-color: #555;
+    }
+
+    .sign {
+      text-align: right;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1 class="ms">The dangers of <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a></h1>
+  <p>
+    If you've ever trained any machine learning model you have faced the infamous
+    problem of overfitting. It's seems so <em>unfair</em> that after some point,
+    no matter how hard you try to keep familiarizing your model with your training
+    data, the accuracy on the test data is stuck or, even worse, it decreases.
+  </p>
+  <p>
+    This phenomenon is known as <strong>overfitting</strong>. It essentially happens
+    when your model has done as much as it could recognizing the patterns in the data
+    and has instead started learning the noise. To illustrate this, try adding some
+    new data points to the regression model below by clicking within the canvas. If you
+    simulate your data to form a noisy linear relation you will see how the
+    <strong style="color: tomato">red</strong> curve (which has the required number
+    of parameters to fit your points perfectly) adapts to the noise in your data, while
+    the <strong style="color: teal">blue</strong> line captures the true &mdash;more
+    general&mdash; linear relation.
+
+  </p>
+  <div id="canvasHolder">
+    <div id="canvasWrapper"></div>
+    <div id="canvasTexture"></div>
+    <div id="reset"><a class="link" onclick="resetPoints()">Reset</a></div>
+  </div>
+  <p>
+    The moral of the story is simple: <em>be careful with the number of parameters in
+      your model!</em> It is essential that you find a model size that has enough learnable
+    parameters to recognize the patterns in your data (preventing underfitting) but you
+    must not overshoot by too much, or else your model will generalize poorly to unseen
+    data. This is usually difficult and several other factors are at play, e.g. it's
+    crucial to stop training when the loss on the validation data starts increasing
+    steadily.
+  </p>
+  <p class="credit">
+    This project uses:
+  </p>
+  <ul class="credit">
+    <li>
+      The <a class="link" href="https://p5js.org">p5.js</a> library for drawing on the canvas.
+    </li>
+    <li>
+      <a class="link" href="http://mlweb.loria.fr/lalolab/lalolib.html">LALOLib</a> for performing
+      matrix algebra on the browser.
+    </li>
+  </ul>
+  <p class="ms sign">Created by <a href="https://github.com/AdrianDoM">AdrianDoM</a> / 
+  <a href="https://twitter.com/cakewalkingdot">@cakewalkingdot</a></p>
+</body>
+
+</html>
