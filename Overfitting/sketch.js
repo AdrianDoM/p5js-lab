@@ -7,7 +7,11 @@ let y_vals = []
 let plot_range, reg1, reg2
 
 function setup() {
-  const cnv = createCanvas(600, 400)
+  let cnv
+  if (windowWidth >= 650)
+    cnv = createCanvas(600, 400)
+  else
+    cnv = createCanvas(windowWidth - 20, (windowWidth - 20) * 4 / 6)
   cnv.parent('canvasWrapper')
   cnv.touchMoved(event => event.preventDefault())
 
@@ -64,6 +68,18 @@ function mouseClicked() {
     x_vals.push(mouseX)
     y_vals.push(mouseY)
   }
+}
+
+function touchEnded() {
+  mouseClicked()
+}
+
+function windowResized() {
+  if (windowWidth >= 650)
+    resizeCanvas(600, 400)
+  else
+    resizeCanvas(windowWidth - 20, (windowWidth - 20) * 4 / 6)
+  resetPoints()
 }
 
 function drawPoints() {
